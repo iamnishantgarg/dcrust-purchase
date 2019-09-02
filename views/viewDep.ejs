@@ -1,0 +1,11 @@
+<% include partials/header %>
+
+
+<h1>List of available departments</h1>
+
+<% departments.forEach(function(department){ %>
+    <h2><%= department.name %></h2>
+<% }); %>
+
+
+<% include partials/footer %>
