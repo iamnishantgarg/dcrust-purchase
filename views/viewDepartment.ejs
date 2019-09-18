@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h1>List of available departments</h1>
+  </div>
+  <%if(departments.length==0){%>
+  <h1 style="text-align: center">No added departemtns</h1>
+  <%}else{%>
+  <div class="">
+    <ol>
+      <% departments.forEach(function(department){ %>
+      <div class="row justify-content-center d-flex">
+        <li><h5><%= department.departmentName %></h5></li>
+      </div>
+      <% }); %>
+    </ol>
+  </div>
+  <%}%>
+  <div class="d-flex justify-content-center">
+    <a href="/addDepartment" class="btn btn-primary">Add new Department</a>
+  </div>
+</div>
+
+<% include partials/footer %>

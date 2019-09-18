@@ -1,0 +1,14 @@
+
+
+<div class="container">
+    <% foundForms.forEach(function(f,i){ %>
+    
+        <div>
+            <li><a href="/sentBack/<%= f._id %>" class="btn btn-primary"> <%= f.fileId %> </a></li>
+        </div>
+        <br>
+    
+    <% })  %>
+</div>
+
+

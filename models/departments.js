@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var departmentSchema = new mongoose.Schema({
-    name: String
+  departmentName: { type: String, required: true }
 });
 
 module.exports = mongoose.model("Department", departmentSchema);

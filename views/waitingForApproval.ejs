@@ -1,0 +1,14 @@
+<h1>Waiting for Approval forms</h1>
+
+
+
+<% foundForms.forEach(function(f,i){ %>
+    
+    <div>
+        <a href="/waitingForApproval/<%= f._id %>"> <%= f.fileId %> </a>
+    </div>
+    <br>
+
+<% })  %>
+
+<% include partials/footer %>

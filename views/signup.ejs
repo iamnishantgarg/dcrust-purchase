@@ -1,0 +1,29 @@
+<div class="container">
+  <%include ./partials/messages%>
+  <form action="/auth/register" method="POST">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input id="name" class="form-control" name="name" />
+    </div>
+    <div class="form-group">
+      <label for="emailId">Email Id:</label>
+      <input id="emailId" type="email" class="form-control" name="email" />
+    </div>
+    <div class="form-group">
+      <label for="Phone">Phone number:</label>
+      <input
+        type="number"
+        class="form-control"
+        name="phone"
+        placeholder="9812144554"
+      />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="password" />
+    </div>
+    <input type="Submit" class="btn btn-primary" value="Register" />
+  </form>
+</div>
+
+<% include partials/footer %>

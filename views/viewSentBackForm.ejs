@@ -1,0 +1,131 @@
+<div class="container  rounded">
+    <form action="/waitingForApproval" method="POST">
+      <div class="form-group ">
+        <label for="field1">Complete Specification of the Item Proposed</label>
+        <input
+          type="text"
+          class="form-control "
+          name="field1"
+          value="<%= foundForm.field1 %>"
+        />
+      </div>
+      <div class="form-group ">
+        <label for="field2">Make of the Item to be purchased</label>
+        <input
+          type="text"
+          class="form-control "
+          name="field2"
+          value="<%= foundForm.field2 %>"
+        />
+      </div>
+      <div class="form-group ">
+        <label for="quantity">Quantity</label>
+        <input
+          type="number"
+          class="form-control "
+          name="quantity"
+          value="<%= foundForm.quantity %>"
+        />
+      </div>
+      <div class="form-group ">
+        <label for="field4"
+          >Budget Head of the Department/Office from where expenditure is to be
+          met out</label
+        >
+        <input
+          type="text"
+          class="form-control "
+          name="field4"
+          value="<%= foundForm.field4 %>"
+        />
+      </div>
+      <div class="form-group ">
+        <label for="availBalance"
+          >Available balance in the respective budget head after excluding the
+          actual expenditure incurred & committed liability</label
+        >
+        <input
+          type="number"
+          class="form-control "
+          name="availBalance"
+          value="<%= foundForm.availBalance %>"
+        />
+      </div>
+      <div class="form-group ">
+        <label for="cost"
+          >Actual/Estimated cost of the required item to be purchased</label
+        >
+        <input
+          type="number"
+          class="form-control"
+          name="cost"
+          value="<%= foundForm.cost %>"
+        />
+      </div>
+      <div class="form-group ">
+        <label for="field7">Stock Position</label>
+        <input
+          type="text"
+          class="form-control"
+          name="field7"
+          value="<%= foundForm.field7 %>"
+        />
+      </div>
+      <div class="form-group ">
+        <label for="field8"
+          >Whether the item already in Stock are being utilized fully</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          name="field8"
+          value="<%= foundForm.field8 %>"
+        />
+      </div>
+      <div class="form-group ">
+        <label for="field9">Justification</label>
+        <input
+          type="text"
+          class="form-control"
+          name="field9"
+          value="<%= foundForm.field9 %>"
+        />
+      </div>
+      <div class="form-group ">
+        <label for="field10"
+          >Complete Address of the Firms/Suppliers dealing in the said items
+          alongwih Tele</label
+        >
+        <input
+          type="text"
+          class="form-control "
+          name="field10"
+          value="<%= foundForm.field10 %>"
+        />
+      </div>
+      <div class="form-group ">
+        <label for="fileId">File Id</label>
+        <input
+          type="text"
+          class="form-control"
+          name="fileId"
+          value="<%= foundForm.fileId %>"
+          readonly
+        />
+      </div>
+      <div class="form-group p-3 mb-2 bg-danger rounded text-white">
+        <label for="comments">Comments</label>
+        <input type="text" class="form-control" name="comments" value="<%= foundForm.comments %>" readonly/>
+      </div>
+      <div class="form-group">
+        <label for="department">Department</label>
+        <input type="text" class="form-control" name="department" />
+      </div>
+      <div></div>
+      <button type="submit" class="btn btn-success">Submit Again</button><br />
+      
+    </form>
+    
+  </div>
+  <% include partials/footer %>
+  

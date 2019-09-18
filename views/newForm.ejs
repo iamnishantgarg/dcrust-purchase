@@ -1,16 +1,64 @@
-<% include partials/header %>
-
 <div class="container">
-    <form class="form-group" action="/newForm" method="POST">
-        <input type="text" class="form-control" name="field1" placeholder="field1">
-        <input type="text" class="form-control" name="field2" placeholder="field2">
-        <input type="text" class="form-control" name="field3" placeholder="field3">
-        <input type="text" class="form-control" name="field4" placeholder="field4">
-        <input type="text" class="form-control" name="field5" placeholder="field5">
-        <button class="btn btn-primary">Submit</button>
-    </form>
+  <form action="/newForm" method="POST">
+    <div class="form-group">
+      <label for="field1">Complete Specification of the Item Proposed</label>
+      <input type="text" class="form-control" name="field1" />
+    </div>
+    <div class="form-group">
+      <label for="field2">Make of the Item to be purchased</label>
+      <input type="text" class="form-control" name="field2" />
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" class="form-control" name="quantity" />
+    </div>
+    <div class="form-group">
+      <label for="field4"
+        >Budget Head of the Department/Office from where expenditure is to be
+        met out</label
+      >
+      <input type="text" class="form-control" name="field4" />
+    </div>
+    <div class="form-group">
+      <label for="availBalance"
+        >Available balance in the respective budget head after excluding the
+        actual expenditure incurred & committed liability</label
+      >
+      <input type="number" class="form-control" name="availBalance" />
+    </div>
+    <div class="form-group">
+      <label for="cost"
+        >Actual/Estimated cost of the required item to be purchased</label
+      >
+      <input type="number" class="form-control" name="cost" />
+    </div>
+    <div class="form-group">
+      <label for="field7">Stock Position</label>
+      <input type="text" class="form-control" name="field7" />
+    </div>
+    <div class="form-group">
+      <label for="field8"
+        >Whether the item already in Stock are being utilized fully</label
+      >
+      <input type="text" class="form-control" name="field8" />
+    </div>
+    <div class="form-group">
+      <label for="field9">Justification</label>
+      <input type="text" class="form-control" name="field9" />
+    </div>
+    <div class="form-group">
+      <label for="field10"
+        >Complete Address of the Firms/Suppliers dealing in the said items
+        alongwih Tele</label
+      >
+      <input type="text" class="form-control" name="field10" />
+    </div>
+    <div class="form-group">
+      <label for="fileId">File Id</label>
+      <input type="text" class="form-control" name="fileId" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>
-
-
 
 <% include partials/footer %>
