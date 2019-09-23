@@ -61,6 +61,9 @@ app.use((req, res, next) => {
 // });
 app.use(formRoutes);
 app.use(departmentRoutes);
+app.use("/logs", (req, res, next) => {
+  res.render("logs");
+});
 app.use("/auth", authRoutes);
 app.get("/", function(req, res) {
   res.render("home");
