@@ -1,63 +1,83 @@
-<div class="container">
-  <form action="/newForm" method="POST">
+<div class="container px-5">
+  <form action="/newForm" class="mx-md-5" method="POST">
     <div class="form-group">
       <label for="field1">Complete Specification of the Item Proposed</label>
       <input type="text" class="form-control" name="field1" />
     </div>
     <div class="form-group">
-      <label for="field2">Make of the Item to be purchased</label>
-      <input type="text" class="form-control" name="field2" />
-    </div>
-    <div class="form-group">
       <label for="quantity">Quantity</label>
       <input type="number" class="form-control" name="quantity" />
     </div>
+
     <div class="form-group">
-      <label for="field4"
+      <label for="budgetHead"
         >Budget Head of the Department/Office from where expenditure is to be
         met out</label
       >
-      <input type="text" class="form-control" name="field4" />
-    </div>
-    <div class="form-group">
-      <label for="availBalance"
-        >Available balance in the respective budget head after excluding the
-        actual expenditure incurred & committed liability</label
+      <select
+        class="form-control"
+        id="exampleFormControlSelect1"
+        name="budgetHead"
       >
-      <input type="number" class="form-control" name="availBalance" />
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
     </div>
+
     <div class="form-group">
       <label for="cost"
         >Actual/Estimated cost of the required item to be purchased</label
       >
       <input type="number" class="form-control" name="cost" />
     </div>
+
     <div class="form-group">
-      <label for="field7">Stock Position</label>
-      <input type="text" class="form-control" name="field7" />
+      <label for="nameOfIndenter">Name of Indenter</label>
+      <input type="text" class="form-control" name="nameOfIndenter" />
     </div>
+
     <div class="form-group">
-      <label for="field8"
-        >Whether the item already in Stock are being utilized fully</label
+      <label for="departmentOfIndenter">Department of Indenter</label>
+      <select
+        class="form-control"
+        id="exampleFormControlSelect1"
+        name="departmentOfIndenter"
       >
-      <input type="text" class="form-control" name="field8" />
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
     </div>
-    <div class="form-group">
-      <label for="field9">Justification</label>
-      <input type="text" class="form-control" name="field9" />
-    </div>
-    <div class="form-group">
-      <label for="field10"
-        >Complete Address of the Firms/Suppliers dealing in the said items
-        alongwih Tele</label
-      >
-      <input type="text" class="form-control" name="field10" />
-    </div>
+    <hr />
     <div class="form-group">
       <label for="fileId">File Id</label>
       <input type="text" class="form-control" name="fileId" />
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="date" class="form-control" name="date" />
+    </div>
+
+    <!-- <div class="form-group">
+        <label for="commentsIfAny">Comments if any</label>
+        <select class="form-control" id="exampleFormControlSelect1" name="commentsIfAny">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </div> -->
+    <div class="justify-content-center d-flex">
+      <button type="submit" class="btn btn-primary my-1" style="width: 100%">
+        Submit
+      </button>
+    </div>
   </form>
 </div>
 

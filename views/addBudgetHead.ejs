@@ -1,0 +1,20 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <h3>Add New Budget Head</h3>
+    </div>
+    <form action="/addBudgetHead" method="POST">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Budget Head Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="budgetHeadName"
+          aria-describedby="emailHelp"
+          placeholder="Enter name"
+        />
+        <input type="checkbox" name="isActive" id="isActive" value="1" checked style="display: none">
+      </div>
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+  </div>
+  

@@ -11,10 +11,15 @@ const express = require("express"),
   flash = require("connect-flash"),
   departmentRoutes = require("./routes/department"),
   passport = require("passport"),
-  formRoutes = require("./routes/form");
+  budgetHeadRoutes = require("./routes/budgetHead"),
+  adminRoutes = require("./routes/admin"),
+  Log = require("./models/logs");
+
+const { ensureAuthenticated } = require("./config/auth");
+(formRoutes = require("./routes/form")), (Form = require("./models/forms"));
 require("./config/passport")(passport);
 const MongoURI =
-  "mongodb+srv://owner:owner@123@cluster0-hfi0g.mongodb.net/purchase?retryWrites=true&w=majority";
+  "mongodb+srv://neildahiya:abcdefg@cluster0-cjlhb.mongodb.net/dcrust_final?retryWrites=true&w=majority";
 
 mongoose.connect(MongoURI, { useNewUrlParser: true });
 
@@ -34,38 +39,24 @@ app.use(passport.session());
 app.use(flash());
 
 app.set("view engine", "ejs");
-// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(Layouts);
-//seedDB();
 
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
   res.locals.error = req.flash("error");
   res.locals.isAuth = req.isAuthenticated();
-
   next();
 });
 
-// app.get("/newForm", function(req, res) {
-//   res.render("newForm");
-// });
-// app.post("/newForm", function(req, res) {
-//   console.log(req.body);
-// });
-
-// app.get("/existing", function(req, res) {
-//   res.render("existing");
-// });
 app.use(formRoutes);
 app.use(departmentRoutes);
-app.use("/logs", (req, res, next) => {
-  res.render("logs");
-});
+app.use(adminRoutes);
 app.use("/auth", authRoutes);
-app.get("/", function(req, res) {
+
+app.get("/", (req, res, next) => {
   res.render("home");
 });
 

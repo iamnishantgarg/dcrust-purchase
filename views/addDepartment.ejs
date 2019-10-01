@@ -3,6 +3,7 @@
     <h3>Add New departement</h3>
   </div>
   <form action="/addDepartment" method="POST">
+    <% %>
     <div class="form-group">
       <label for="exampleInputEmail1">Departement name:</label>
       <input
@@ -11,6 +12,14 @@
         name="departmentName"
         aria-describedby="emailHelp"
         placeholder="Enter departement name"
+      />
+      <input
+        type="checkbox"
+        name="isActive"
+        id="isActive"
+        value="1"
+        checked
+        style="display: none"
       />
     </div>
     <button type="submit" class="btn btn-primary">Add</button>

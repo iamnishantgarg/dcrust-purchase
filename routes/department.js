@@ -8,7 +8,7 @@ router.get("/addDepartment", departmentController.getAddDepartment);
 
 router.get(
   "/dashboard",
-  ensureAuthenticated,
+
   departmentController.getDashboard
 );
 

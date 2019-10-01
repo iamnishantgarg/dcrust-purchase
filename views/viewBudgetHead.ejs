@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <h1>List of available departments</h1>
+    </div>
+    <%if(budgetHeads.length==0){%>
+    <h1 style="text-align: center">No added budget head</h1>
+    <%}else{%>
+    <div class="">
+      <ol>
+        <% budgetHeads.forEach(function(budgetHead){ %>
+        <div class="">
+          <div><%= budgetHead.budgetHeadName %></div>
+          <% if(budgetHead.isActive==true){ %>
+            <input type="checkbox" class="form-check-input" name="isActive" id="isActive" checked >
+          <% }else{ %>
+            <input type="checkbox" class="form-check-input" name="isActive" id="isActive" >
+          <% } %>
+        </div>
+        <% }); %>
+      </ol>
+    </div>
+    <%}%>
+    <div class="d-flex justify-content-center">
+      <a href="/addBudgetHead" class="btn btn-primary">Add new Budget Head</a>
+      <form action="/saveDeps" method="POST"></form>
+        <button type="submit" class="btn btn-success">Submitt</button>
+      </form>
+    </div>
+  </div>
+  
+  <% include partials/footer %>
+  

@@ -14,7 +14,7 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
-router.get("/logout", ensureAuthenticated, (req, res, next) => {
+router.get("/logout", (req, res, next) => {
   req.logOut();
   req.flash("success_msg", "Successfully logged out");
   res.redirect("/auth/login");

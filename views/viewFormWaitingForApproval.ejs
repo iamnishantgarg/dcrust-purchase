@@ -1,131 +1,219 @@
+<style type="text/css">
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+
 <div class="container">
-  <form action="/existing" method="POST">
-    <div class="form-group">
-      <label for="field1">Complete Specification of the Item Proposed</label>
-      <input
-        type="text"
-        class="form-control"
-        name="field1"
-        value="<%= foundForm.field1 %>"
-      />
+  <form  action="/newForm" method="POST">
+    <div class="form-inline">
+        <div class="form-group">
+            <label for="field1">Complete Specification</label>
+            <input
+disabled              type="text"
+              class="form-control"
+              name="field1"
+              value="<%= foundForm.field1%>"
+            />
+          </div>
+          
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input
+disabled              type="number"
+              class="form-control"
+              name="quantity"
+              value="<%= foundForm.quantity%>"
+            />
+          </div>
     </div>
-    <div class="form-group">
-      <label for="field2">Make of the Item to be purchased</label>
-      <input
-        type="text"
-        class="form-control"
-        name="field2"
-        value="<%= foundForm.field2 %>"
-      />
+    
+
+    <div class="form-group ">
+      <label for="budgetHead"
+        >Budget Head </label>
+        <input
+disabled              type="number"
+              class="form-control"
+              name="quantity"
+              value="<%= foundForm.budgetHead%>"
+            />
+      
     </div>
-    <div class="form-group">
-      <label for="quantity">Quantity</label>
-      <input
-        type="number"
-        class="form-control"
-        name="quantity"
-        value="<%= foundForm.quantity %>"
-      />
-    </div>
-    <div class="form-group">
-      <label for="field4"
-        >Budget Head of the Department/Office from where expenditure is to be
-        met out</label
-      >
-      <input
-        type="text"
-        class="form-control"
-        name="field4"
-        value="<%= foundForm.field4 %>"
-      />
-    </div>
-    <div class="form-group">
-      <label for="availBalance"
-        >Available balance in the respective budget head after excluding the
-        actual expenditure incurred & committed liability</label
-      >
-      <input
-        type="number"
-        class="form-control"
-        name="availBalance"
-        value="<%= foundForm.availBalance %>"
-      />
-    </div>
+
     <div class="form-group">
       <label for="cost"
-        >Actual/Estimated cost of the required item to be purchased</label
+        >Actual/Estimated cost</label
       >
       <input
-        type="number"
+disabled        type="number"
         class="form-control"
         name="cost"
-        value="<%= foundForm.cost %>"
+        value="<%= foundForm.cost%>"
       />
     </div>
+
     <div class="form-group">
-      <label for="field7">Stock Position</label>
+      <label for="nameOfIndenter">Name of Indenter</label>
       <input
-        type="text"
+disabled        type="text"
         class="form-control"
-        name="field7"
-        value="<%= foundForm.field7 %>"
+        name="nameOfIndenter"
+        value="<%= foundForm.nameOfIndenter%>"
       />
     </div>
+
     <div class="form-group">
-      <label for="field8"
-        >Whether the item already in Stock are being utilized fully</label
-      >
+      <label for="departmentOfIndenter">Department of Indenter</label>
       <input
-        type="text"
+disabled        type="text"
         class="form-control"
-        name="field8"
-        value="<%= foundForm.field8 %>"
+        name="nameOfIndenter"
+        value="<%= foundForm.departmentOfIndenter%>"
       />
+      
     </div>
-    <div class="form-group">
-      <label for="field9">Justification</label>
-      <input
-        type="text"
-        class="form-control"
-        name="field9"
-        value="<%= foundForm.field9 %>"
-      />
-    </div>
-    <div class="form-group">
-      <label for="field10"
-        >Complete Address of the Firms/Suppliers dealing in the said items
-        alongwih Tele</label
-      >
-      <input
-        type="text"
-        class="form-control"
-        name="field10"
-        value="<%= foundForm.field10 %>"
-      />
-    </div>
+    <hr />
     <div class="form-group">
       <label for="fileId">File Id</label>
-      <input
-        type="text"
-        class="form-control"
-        name="fileId"
-        value="<%= foundForm.fileId %>"
-      />
+      <p><%= foundForm.fileId%></p>
     </div>
     <div class="form-group">
-      <label for="comments">Comments</label>
-      <input type="text" class="form-control" name="comments" />
+      <label for="date">Date</label>
+      <p><%= foundForm.date%></p>
     </div>
-    <div class="form-group">
-      <label for="department">Department</label>
-      <input type="text" class="form-control" name="department" />
+    <% if(!foundForm.approved){%>
+    <div id="myBtn" class="gtb btn btn-primary">Approve</button>
     </div>
-    <div></div>
-    <button type="submit" class="btn btn-success">Approve</button><br />
-    <button type="submit" class="btn btn-danger" formaction="/sentBack">
-      Send Back
-    </button>
+    <% } %>
+    <%if(!foundForm.rejected){%>
+    <a
+      href="/viewFormWaitingForApproval/<%= foundForm._id%>/comments/new"
+      class="btn btn-success"
+      >Add new log</a
+    ><%}%>
   </form>
+  <hr />
+  <table style="width:100%">
+      <tr>
+        <th>Date</th>
+        <th>Department</th>
+        <th>Comment</th>
+      </tr>
+      
+      
+      
+      <% for(var i=foundForm.logs.length-1; i>=0; i--){ %>
+        <tr>
+        <td><%= foundForm.logs[i].date.toString().substring(0,15) %></td>
+        <td><%= foundForm.logs[i].department %></td>
+        <td><%= foundForm.logs[i].comment %></td>
+      </tr>
+      <% } %>
+
+    
+      
+  </table>
   
+  
+  <hr />
+
+  <a id="myModal" class="modal">
+      <!-- Modal content -->
+      <form action="/changeId" method="POST">
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Enter the File Id</p>
+        
+        <div class="form-group">
+            
+            <input
+              type="text"
+              class="form-control"
+              name="newFileId"
+              
+            />
+          <input type="hidden" name="fileId" value="<%= foundForm.fileId %>">
+        </div>
+        
+        <button type="submit" class="btn btn-success" >
+          Approve</button ><br />
+          
+      </div>
+
+      </form>
+    
+
+  <!-- LOGs -->
+ 
+  <!-- END of Log -->
+
+  <!-- <button type="submit" class="btn btn-success">Approve</button><br /> -->
+  <!-- <button type="submit" class="btn btn-primary" formaction="/approve">
+      Approve
+    </button> -->
 </div>
+
+<!-- Trigger/Open The Modal -->
+
+<script>
+  var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  };
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+</script>
+
 <% include partials/footer %>
