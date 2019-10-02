@@ -18,6 +18,8 @@ router.post(
   formController.postWaitingForApproval
 );
 
+router.post("/pdfRoute/:id", formController.postPDF);
+
 router.get("/queries", formController.getQueries);
 router.post("/queries", formController.postQueries);
 module.exports = router;

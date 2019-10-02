@@ -37,84 +37,141 @@
   }
 </style>
 
-<div class="container">
-  <form  action="/newForm" method="POST">
-    <div class="form-inline">
-        <div class="form-group">
-            <label for="field1">Complete Specification</label>
-            <input
-disabled              type="text"
+
+<!-- <form action="/pdfroute" method="POST">
+  
+</form> -->
+<form  action="/newForm" method="POST">
+<div class="container mt-2" >
+    <hr>
+    <div class="row my-1">
+            <div class="col-md-6">
+                <label for="fileId">File ID</label>
+            </div>
+            <div class="col-md-6">
+                <input 
+                class="form-control"
+                name="fileId"
+                disabled
+                value="<%= foundForm.fileId %>"/>
+            </div>
+    </div>  
+
+
+    <div class="row my-1">
+        <div class="col-md-6">
+          <label for="date">Date Created</label>
+        </div>
+        <div class="col-md-6">
+            <input 
+            class="form-control"
+            name="fileId"
+            disabled
+            value="<%= foundForm.date.toString().substring(0,15) %>"/>
+        </div>
+    </div>  
+
+
+    <hr />
+    
+    <div class="row my-1">
+      
+          <div class="col-md-6">
+              <label for="field1">Complete Specification</label>
+              
+          </div>
+          <div class="col-md-6">
+              <input
+              disabled
+              type="text"
               class="form-control"
               name="field1"
               value="<%= foundForm.field1%>"
             />
           </div>
-          
-          <div class="form-group">
-            <label for="quantity">Quantity</label>
-            <input
-disabled              type="number"
-              class="form-control"
-              name="quantity"
-              value="<%= foundForm.quantity%>"
-            />
-          </div>
-    </div>
+              
+    </div>         
+    
+    <div class="row my-1">
+      <div class="col-md-6">
+          <label for="quantity">Quantity</label>
+      </div>
+      <div class="col-md-6">
+          <input
+          disabled
+          type="number"
+          class="form-control"
+          name="quantity"
+          value="<%= foundForm.quantity%>"
+        />
+      </div>
+    </div>        
     
 
-    <div class="form-group ">
-      <label for="budgetHead"
-        >Budget Head </label>
-        <input
-disabled              type="number"
-              class="form-control"
-              name="quantity"
-              value="<%= foundForm.budgetHead%>"
-            />
-      
-    </div>
+    <div class="row my-1">
+        <div class="col-md-6">
+            <label for="budgetHead">Budget Head </label>
+        </div>
+        <div class="col-md-6">
+          <input
+        disabled              type="number"
+                      class="form-control"
+                      name="quantity"
+                      value="<%= foundForm.budgetHead%>"
+                    />
+        </div>
+    </div>  
 
-    <div class="form-group">
-      <label for="cost"
-        >Actual/Estimated cost</label
-      >
-      <input
-disabled        type="number"
-        class="form-control"
-        name="cost"
-        value="<%= foundForm.cost%>"
-      />
-    </div>
+    <div class="row my-1">
+        <div class="col-md-6">
+            <label for="cost"
+            >Actual/Estimated cost</label
+          >
+        </div>
+        <div class="col-md-6">
+            <input
+            disabled        type="number"
+                    class="form-control"
+                    name="cost"
+                    value="<%= foundForm.cost%>"
+                  />
+        </div>
+    </div>  
+    
 
-    <div class="form-group">
-      <label for="nameOfIndenter">Name of Indenter</label>
-      <input
-disabled        type="text"
-        class="form-control"
-        name="nameOfIndenter"
-        value="<%= foundForm.nameOfIndenter%>"
-      />
-    </div>
+    <div class="row my-1">
+          <div class="col-md-6">
+              <label for="nameOfIndenter">Name of Indenter</label>
+          </div>
+          <div class="col-md-6">
+              <input
+        disabled        type="text"
+                class="form-control"
+                name="nameOfIndenter"
+                value="<%= foundForm.nameOfIndenter%>"
+              />
+          </div>
+    </div>  
 
-    <div class="form-group">
-      <label for="departmentOfIndenter">Department of Indenter</label>
-      <input
-disabled        type="text"
-        class="form-control"
-        name="nameOfIndenter"
-        value="<%= foundForm.departmentOfIndenter%>"
-      />
-      
+
+    <div class="row my-1">
+            <div class="col-md-6">
+                <label for="departmentOfIndenter">Department of Indenter</label>
+            </div>
+            <div class="col-md-6">
+                <input
+                disabled        type="text"
+                        class="form-control"
+                        name="nameOfIndenter"
+                        value="<%= foundForm.departmentOfIndenter%>"
+                      />
+            </div>
     </div>
+          
     <hr />
-    <div class="form-group">
-      <label for="fileId">File Id</label>
-      <p><%= foundForm.fileId%></p>
-    </div>
-    <div class="form-group">
-      <label for="date">Date</label>
-      <p><%= foundForm.date%></p>
-    </div>
+
+
+
     <% if(!foundForm.approved){%>
     <div id="myBtn" class="gtb btn btn-primary">Approve</button>
     </div>
@@ -125,6 +182,8 @@ disabled        type="text"
       class="btn btn-success"
       >Add new log</a
     ><%}%>
+    <button class="btn btn-info float-right mx-1" formaction="/pdfroute/<%= foundForm._id%>">Download Logs(PDF)</button>
+    <button class="btn btn-warning float-right" formaction="#">Download Logs(Excel)</button>
   </form>
   <hr />
   <table style="width:100%">
@@ -133,9 +192,6 @@ disabled        type="text"
         <th>Department</th>
         <th>Comment</th>
       </tr>
-      
-      
-      
       <% for(var i=foundForm.logs.length-1; i>=0; i--){ %>
         <tr>
         <td><%= foundForm.logs[i].date.toString().substring(0,15) %></td>
@@ -175,19 +231,11 @@ disabled        type="text"
       </div>
 
       </form>
-    
 
-  <!-- LOGs -->
- 
-  <!-- END of Log -->
-
-  <!-- <button type="submit" class="btn btn-success">Approve</button><br /> -->
-  <!-- <button type="submit" class="btn btn-primary" formaction="/approve">
-      Approve
-    </button> -->
 </div>
 
-<!-- Trigger/Open The Modal -->
+
+
 
 <script>
   var modal = document.getElementById("myModal");

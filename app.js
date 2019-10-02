@@ -13,7 +13,9 @@ const express = require("express"),
   passport = require("passport"),
   budgetHeadRoutes = require("./routes/budgetHead"),
   adminRoutes = require("./routes/admin"),
-  Log = require("./models/logs");
+  Log = require("./models/logs"),
+  pdfMake = require("./pdfmake/pdfmake"),
+  vfsFonts = require("./pdfmake/vfs_fonts");
 
 const { ensureAuthenticated } = require("./config/auth");
 (formRoutes = require("./routes/form")), (Form = require("./models/forms"));
@@ -22,6 +24,9 @@ const MongoURI =
   "mongodb+srv://neildahiya:abcdefg@cluster0-cjlhb.mongodb.net/dcrust_final?retryWrites=true&w=majority";
 
 mongoose.connect(MongoURI, { useNewUrlParser: true });
+
+//pdf fonts
+pdfMake.vfs = vfsFonts.pdfMake.vfs;
 
 // sessions
 app.use(
