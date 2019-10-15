@@ -5,6 +5,8 @@ const SentBackForm = require("../models/sentBack"),
   Comment = require("../models/comment");
 Log = require("../models/logs");
 
+Log = require("../models/logs");
+
 exports.getNewForm = (req, res, next) => {
   BudgetHead.find({ isActive: true }, (err, budgetHeads) => {
     Department.find({ isActive: true }, (err, departments) => {
