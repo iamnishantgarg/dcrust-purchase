@@ -13,7 +13,9 @@ const express = require("express"),
   passport = require("passport"),
   budgetHeadRoutes = require("./routes/budgetHead"),
   adminRoutes = require("./routes/admin"),
-  Log = require("./models/logs");
+  Log = require("./models/logs"),
+  pdfMake = require("./pdfmake/pdfmake"),
+  vfsFonts = require("./pdfmake/vfs_fonts");
 
 const { ensureAuthenticated } = require("./config/auth");
 (formRoutes = require("./routes/form")), (Form = require("./models/forms"));
@@ -22,6 +24,9 @@ const MongoURI =
   "mongodb+srv://neildahiya:abcdefg@cluster0-cjlhb.mongodb.net/dcrust_final?retryWrites=true&w=majority";
 
 mongoose.connect(MongoURI, { useNewUrlParser: true });
+
+//pdf fonts
+pdfMake.vfs = vfsFonts.pdfMake.vfs;
 
 // sessions
 app.use(
@@ -56,7 +61,32 @@ app.use(departmentRoutes);
 app.use(adminRoutes);
 app.use("/auth", authRoutes);
 
-app.get("/", (req, res, next) => {
+app.post("/excel/:id", function(req, res) {
+  var logArr = [];
+
+  Form.findById(req.params.id, function(err, foundForm) {
+    for (var i = 0; i < foundForm.logs.length; i++) {
+      Log.findById(foundForm.logs[i]._id, function(err, result) {
+        var arr = [];
+        arr.push(result.date.toString().substring(0, 15));
+        arr.push(result.department);
+        arr.push(result.comment);
+        logArr.push(arr);
+      });
+    }
+  });
+  var fs = require("fs");
+  var csv = require("fast-csv");
+  var ws = fs.createWriteStream("my.csv");
+  setTimeout(function() {
+    csv.write(logArr).pipe(ws);
+    setTimeout(function() {
+      res.download("./my.csv");
+    }, 4 * 1000);
+  }, 4 * 1000);
+});
+
+app.get("/", ensureAuthenticated, (req, res, next) => {
   res.render("home");
 });
 

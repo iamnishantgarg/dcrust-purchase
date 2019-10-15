@@ -1,10 +1,50 @@
 var adminController = require("../controller/admin");
+var { ensureAuthenticated } = require("../config/auth");
+var BudgetHead = require("../models/budgetHead");
 const router = require("express").Router();
 
-router.get("/adminDash", adminController.getAdminDashboard);
+router.get(
+  "/adminDash",
+  ensureAuthenticated,
+  adminController.getAdminDashboard
+);
 
-router.get("/addBudgetHead", adminController.getAddBudgetHead);
+router.get(
+  "/updateBudgetHead",
+  ensureAuthenticated,
+  adminController.getUpdateBudgetHead
+);
 
-router.get("/viewBudgetHead", adminController.getAddBudgetHead);
+router.post(
+  "/updateBudgetHead",
+  ensureAuthenticated,
+  adminController.postUpdateBudgetHead
+);
+
+router.get(
+  "/updateDepartment",
+  ensureAuthenticated,
+  adminController.getUpdateDepartment
+);
+
+router.post(
+  "/updateDepartment",
+  ensureAuthenticated,
+  adminController.postUpdateDepartment
+);
+
+router.get(
+  "/updateComment",
+  ensureAuthenticated,
+  adminController.getUpdateComment
+);
+
+router.post(
+  "/updateComment",
+  ensureAuthenticated,
+  adminController.postUpdateComment
+);
+
+// router.get("/viewBudgetHead", adminController.getAddBudgetHead);
 
 module.exports = router;

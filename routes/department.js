@@ -2,16 +2,29 @@ const router = require("express").Router();
 const { ensureAuthenticated } = require("../config/auth");
 const departmentController = require("../controller/department");
 
-router.get("/viewDepartment", departmentController.getViewDepartment);
+router.get(
+  "/viewDepartment",
+  ensureAuthenticated,
+  departmentController.getViewDepartment
+);
 
-router.get("/addDepartment", departmentController.getAddDepartment);
+router.get(
+  "/addDepartment",
+  ensureAuthenticated,
+  departmentController.getAddDepartment
+);
 
 router.get(
   "/dashboard",
 
+  ensureAuthenticated,
   departmentController.getDashboard
 );
 
-router.post("/addDepartment", departmentController.postAddDepartment);
+router.post(
+  "/addDepartment",
+  ensureAuthenticated,
+  departmentController.postAddDepartment
+);
 
 module.exports = router;

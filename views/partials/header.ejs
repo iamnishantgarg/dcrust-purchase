@@ -6,6 +6,12 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous"
+    />
     <title>Test app</title>
     <style>
       .nav a {
@@ -19,18 +25,24 @@
       style="background: dodgerblue;color:white;"
     >
       <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/">Home<i class="fas pl-1 fa-home"></i></a>
       </li>
       <%if(!isAuth){%>
       <li class="nav-item">
-        <a class="nav-link" href="/auth/login">Login</a>
+        <a class="nav-link" href="/auth/login"
+          >Login <i class=" pl-1 fas fa-sign-in-alt"></i
+        ></a>
       </li>
       <%}else{%>
       <li class="nav-item">
-        <a class="nav-link" href="/dashboard">Dashboard</a>
+        <a class="nav-link" href="/dashboard"
+          >Dashboard <i class="fas fa-cookie"></i
+        ></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/auth/logout">Logout</a>
+        <a class="nav-link" href="/auth/logout"
+          >Logout <i class="fas fa-sign-out-alt"></i
+        ></a>
       </li>
       <%}%>
     </ul>

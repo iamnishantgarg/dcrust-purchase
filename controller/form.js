@@ -1,8 +1,16 @@
 const SentBackForm = require("../models/sentBack"),
-  Forms = require("../models/forms");
+  Forms = require("../models/forms"),
+  BudgetHead = require("../models/budgetHead"),
+  Department = require("../models/deparment"),
+  Comment = require("../models/comment");
+Log = require("../models/logs");
 
 exports.getNewForm = (req, res, next) => {
-  res.render("newForm", {});
+  BudgetHead.find({ isActive: true }, (err, budgetHeads) => {
+    Department.find({ isActive: true }, (err, departments) => {
+      res.render("newForm", { budgetHeads, departments });
+    });
+  });
 };
 exports.postNewForm = (req, res, next) => {
   console.log("Hey");
@@ -99,7 +107,11 @@ exports.getWaitingForApproval = (req, res, next) => {
     if (err) {
       console.log(err);
     } else {
-      res.render("newLog", { foundForm: foundForm });
+      Department.find({ isActive: true }, (err, departments) => {
+        Comment.find({ isActive: true }, (err, comments) => {
+          res.render("newLog", { foundForm, departments, comments });
+        });
+      });
     }
   });
 };
@@ -134,4 +146,78 @@ exports.postWaitingForApproval = (req, res, next) => {
       );
     }
   });
+};
+
+exports.postPDF = (req, res, next) => {
+  var logArr = [];
+
+  Form.findById(req.params.id, function(err, foundForm) {
+    for (var i = 0; i < foundForm.logs.length; i++) {
+      Log.findById(foundForm.logs[i]._id, function(err, result) {
+        var arr = [];
+        arr.push(result.date.toString().substring(0, 15));
+        arr.push(result.department);
+        arr.push(result.comment);
+
+        logArr.push(arr);
+      });
+    }
+    logArr.unshift([
+      { text: "Date", style: "tableHeader" },
+      { text: "Department", style: "tableHeader" },
+      { text: "Comment", style: "tableHeader" }
+    ]);
+    setTimeout(function() {
+      var dd = {
+        footer: {
+          columns: ["Left part", { text: "Right part", alignment: "right" }],
+          margin: [5, 2, 10, 20]
+        },
+        content: [
+          {
+            text: "DCRUST Purchase Department\n\n",
+            style: "header",
+            alignment: "center"
+          },
+          {
+            text: "File ID : " + foundForm.fileId,
+            alignment: "center",
+            fontSize: 14,
+            bold: true,
+            margin: [0, 20, 0, 8]
+          },
+          {
+            //style: "tableExample",
+
+            table: {
+              headerRows: 1,
+              width: [200, 200, 200],
+              alignment: "center",
+              body: logArr,
+              style: "table"
+            }
+            // layout: "headerLineOnly"
+          }
+        ],
+        styles: {
+          table: {
+            alignment: "center"
+          }
+        }
+      };
+      const pdfDoc = pdfMake.createPdf(dd);
+      pdfDoc.getBase64(data => {
+        res.writeHead(200, {
+          "Content-Type": "application/pdf",
+          "Content-Disposition": 'attachment; "filename.pdf"'
+        });
+        const download = Buffer.from(data.toString("utf-8"), "base64");
+        res.end(download);
+      });
+    }, 1 * 1000);
+  });
+  // setTimeout(function() {
+  //   console.log(logArr + " =  heyyyyyy ");
+  //   // this code will only run when time has ellapsed
+  // }, 4 * 1000);
 };

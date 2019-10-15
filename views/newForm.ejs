@@ -1,78 +1,85 @@
 <div class="container px-5">
   <form action="/newForm" class="mx-md-5" method="POST">
-    <div class="form-group">
-      <label for="field1">Complete Specification of the Item Proposed</label>
-      <input type="text" class="form-control" name="field1" />
+    <div class="row my-1">
+      <div class="col-md-6">
+        <label for="field1">Complete Specification of the Item Proposed</label>
+      </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control" name="field1" />
+      </div>
     </div>
-    <div class="form-group">
-      <label for="quantity">Quantity</label>
-      <input type="number" class="form-control" name="quantity" />
+    <div class="row my-1">
+      <div class="col-md-6"><label for="quantity">Quantity</label></div>
+      <div class="col-md-6">
+        <input type="number" class="form-control" name="quantity" />
+      </div>
     </div>
-
-    <div class="form-group">
-      <label for="budgetHead"
-        >Budget Head of the Department/Office from where expenditure is to be
-        met out</label
-      >
-      <select
-        class="form-control"
-        id="exampleFormControlSelect1"
-        name="budgetHead"
-      >
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="cost"
-        >Actual/Estimated cost of the required item to be purchased</label
-      >
-      <input type="number" class="form-control" name="cost" />
-    </div>
-
-    <div class="form-group">
-      <label for="nameOfIndenter">Name of Indenter</label>
-      <input type="text" class="form-control" name="nameOfIndenter" />
-    </div>
-
-    <div class="form-group">
-      <label for="departmentOfIndenter">Department of Indenter</label>
-      <select
-        class="form-control"
-        id="exampleFormControlSelect1"
-        name="departmentOfIndenter"
-      >
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-    </div>
-    <hr />
-    <div class="form-group">
-      <label for="fileId">File Id</label>
-      <input type="text" class="form-control" name="fileId" />
-    </div>
-    <div class="form-group">
-      <label for="date">Date</label>
-      <input type="date" class="form-control" name="date" />
-    </div>
-
-    <!-- <div class="form-group">
-        <label for="commentsIfAny">Comments if any</label>
-        <select class="form-control" id="exampleFormControlSelect1" name="commentsIfAny">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+    <div class="row my-1">
+      <div class="col-md-6">
+        <label for="budgetHead">Budget Head of the Department</label>
+      </div>
+      <div class="col-md-6">
+        <select
+          class="form-control"
+          id="exampleFormControlSelect1"
+          name="budgetHead"
+        >
+        <%for(var i=0;i<budgetHeads.length;i++){%>
+          <option><%=budgetHeads[i].budgetHeadName%></option>
+          <%}%>
+         
         </select>
-    </div> -->
+      </div>
+    </div>
+    <div class="row my-1">
+      <div class="col-md-6">
+        <label for="cost"
+          >Actual/Estimated cost of the required item to be purchased</label
+        >
+      </div>
+      <div class="col-md-6">
+        <input type="number" class="form-control" name="cost" />
+      </div>
+    </div>
+    <div class="row my-1">
+      <div class="col-md-6">
+        <label for="nameOfIndenter">Name of Indenter</label>
+      </div>
+      <div class="col-md-6">
+        <input type="text" class="form-control" name="nameOfIndenter" />
+      </div>
+    </div>
+    <div class="row my-1">
+      <div class="col-md-6">
+        <label for="departmentOfIndenter">Department of Indenter</label>
+      </div>
+      <div class="col-md-6">
+        <select
+          class="form-control"
+          id="exampleFormControlSelect1"
+          name="departmentOfIndenter"
+        >
+        <%for(var i=0;i<departments.length;i++){%>
+        <option><%=departments[i].departmentName%></option>
+        <%}%>
+        </select>
+      </div>
+    </div>
+    <div class="row my-1">
+      <div class="col-md-6"><label for="fileId">File Id</label></div>
+      <div class="col-md-6">
+        <input type="text" class="form-control" name="fileId" />
+      </div>
+    </div>
+    <div class="row my-1">
+      <div class="col-md-6">
+        <label for="date">Date</label>
+      </div>
+      <div class="col-md-6">
+        <input type="date" class="form-control" name="date" />
+      </div>
+    </div>
+
     <div class="justify-content-center d-flex">
       <button type="submit" class="btn btn-primary my-1" style="width: 100%">
         Submit
