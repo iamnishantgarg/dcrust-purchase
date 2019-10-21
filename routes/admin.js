@@ -12,36 +12,42 @@ router.get(
 
 router.get(
   "/updateBudgetHead",
+  ensureAdmin,
   ensureAuthenticated,
   adminController.getUpdateBudgetHead
 );
 
 router.post(
   "/updateBudgetHead",
+  ensureAdmin,
   ensureAuthenticated,
   adminController.postUpdateBudgetHead
 );
 
 router.get(
   "/updateDepartment",
+  ensureAdmin,
   ensureAuthenticated,
   adminController.getUpdateDepartment
 );
 
 router.post(
   "/updateDepartment",
+  ensureAdmin,
   ensureAuthenticated,
   adminController.postUpdateDepartment
 );
 
 router.get(
   "/updateComment",
+  ensureAdmin,
   ensureAuthenticated,
   adminController.getUpdateComment
 );
 
 router.post(
   "/updateComment",
+  ensureAdmin,
   ensureAuthenticated,
   adminController.postUpdateComment
 );
