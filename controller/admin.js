@@ -2,7 +2,7 @@ var Form = require("../models/forms");
 var BudgetHead = require("../models/budgetHead");
 var Department = require("../models/deparment");
 var Comment = require("../models/comment");
-
+var async = require("async");
 exports.getAdminDashboard = (req, res, next) => {
   res.render("adminDash");
 };
@@ -18,33 +18,52 @@ exports.getUpdateBudgetHead = (req, res, next) => {
 
 exports.postUpdateBudgetHead = (req, res, next) => {
   var { budgetHeads, newBudgetHead, heads } = req.body;
-  BudgetHead.find().then(lst => {
-    var result = lst;
-    result.forEach(i => {
-      i.isActive = false;
-    });
-    result.forEach(i => i.save());
-  });
+  console.log(budgetHeads);
 
-  setTimeout(() => {
-    if (budgetHeads) {
-      budgetHeads.forEach(element => {
-        BudgetHead.findOne({ _id: element }, (err, budgetHead) => {
-          budgetHead.isActive = true;
-          budgetHead.save();
-        });
-      });
-    }
-    if (newBudgetHead) {
-      var b = new BudgetHead({ budgetHeadName: newBudgetHead });
-      b.save(err => {
-        console.log(err);
-      });
-    }
-    setTimeout(() => {
-      res.redirect("/adminDash");
-    }, 10000);
-  }, 6000);
+  BudgetHead.find()
+    .then(heads => {
+      async.each(
+        heads,
+        (head, cb) => {
+          head.isActive = false;
+          head.save(cb);
+        },
+        err => {
+          console.log(err);
+          if (budgetHeads) {
+            async.each(
+              budgetHeads,
+              (head, cb) => {
+                BudgetHead.findOne({ _id: head }).then(h => {
+                  h.isActive = true;
+                  h.save(cb);
+                });
+              },
+              err => {
+                console.log(err);
+
+                if (newBudgetHead) {
+                  var b = new BudgetHead({ budgetHeadName: newBudgetHead });
+                  b.save(err => {
+                    console.log(err);
+                  });
+                }
+                res.redirect("/adminDash");
+              }
+            );
+          } else {
+            if (newBudgetHead) {
+              var b = new BudgetHead({ budgetHeadName: newBudgetHead });
+              b.save(err => {
+                console.log(err);
+              });
+            }
+            res.redirect("/adminDash");
+          }
+        }
+      );
+    })
+    .catch(err => console.log(err));
 };
 
 exports.getUpdateDepartment = (req, res, next) => {
@@ -59,33 +78,50 @@ exports.getUpdateDepartment = (req, res, next) => {
 
 exports.postUpdateDepartment = (req, res, next) => {
   var { departments, newDepartment } = req.body;
-  Department.find().then(lst => {
-    var result = lst;
-    result.forEach(i => {
-      i.isActive = false;
-    });
-    result.forEach(i => i.save());
-  });
+  Department.find()
+    .then(depts => {
+      async.each(
+        depts,
+        (dept, cb) => {
+          dept.isActive = false;
+          dept.save(cb);
+        },
+        err => {
+          console.log(err);
+          if (departments) {
+            async.each(
+              departments,
+              (dept, cb) => {
+                Department.findOne({ _id: dept }).then(d => {
+                  d.isActive = true;
+                  d.save(cb);
+                });
+              },
+              err => {
+                console.log(err);
 
-  setTimeout(() => {
-    if (departments) {
-      departments.forEach(element => {
-        Department.findOne({ _id: element }, (err, department) => {
-          department.isActive = true;
-          department.save();
-        });
-      });
-    }
-    if (newDepartment) {
-      var b = new Department({ departmentName: newDepartment });
-      b.save(err => {
-        console.log(err);
-      });
-    }
-    setTimeout(() => {
-      res.redirect("/adminDash");
-    }, 10000);
-  }, 6000);
+                if (newDepartment) {
+                  var b = new Department({ departmentName: newDepartment });
+                  b.save(err => {
+                    console.log(err);
+                  });
+                }
+                res.redirect("/adminDash");
+              }
+            );
+          } else {
+            if (newDepartment) {
+              var b = new Department({ departmentName: newBudgetHead });
+              b.save(err => {
+                console.log(err);
+              });
+            }
+            res.redirect("/adminDash");
+          }
+        }
+      );
+    })
+    .catch(err => console.log(err));
 };
 
 exports.getUpdateComment = (req, res, next) => {
@@ -100,31 +136,95 @@ exports.getUpdateComment = (req, res, next) => {
 
 exports.postUpdateComment = (req, res, next) => {
   var { comments, newComment } = req.body;
-  Comment.find().then(lst => {
-    var result = lst;
-    result.forEach(i => {
-      i.isActive = false;
-    });
-    result.forEach(i => i.save());
-  });
 
-  setTimeout(() => {
-    if (comments) {
-      comments.forEach(element => {
-        Comment.findOne({ _id: element }, (err, comment) => {
-          comment.isActive = true;
-          comment.save();
-        });
-      });
-    }
-    if (newComment) {
-      var b = new Comment({ commentName: newComment });
-      b.save(err => {
-        console.log(err);
-      });
-    }
-    setTimeout(() => {
-      res.redirect("/adminDash");
-    }, 10000);
-  }, 6000);
+  Comment.find()
+    .then(cmnts => {
+      async.each(
+        cmnts,
+        (cmnt, cb) => {
+          cmnt.isActive = false;
+          cmnt.save(cb);
+        },
+        err => {
+          console.log(err);
+          if (comments) {
+            async.each(
+              comments,
+              (cmnt, cb) => {
+                Comment.findOne({ _id: cmnt }).then(c => {
+                  c.isActive = true;
+                  c.save(cb);
+                });
+              },
+              err => {
+                console.log(err);
+
+                if (newComment) {
+                  var b = new Comment({ commentName: newComment });
+                  b.save(err => {
+                    console.log(err);
+                  });
+                }
+                res.redirect("/adminDash");
+              }
+            );
+          } else {
+            if (newComment) {
+              var b = new Comment({ commentName: newComment });
+              b.save(err => {
+                console.log(err);
+              });
+            }
+            res.redirect("/adminDash");
+          }
+        }
+      );
+    })
+    .catch(err => console.log(err));
+
+  // Comment.find()
+  //   .then(lst => {
+  //     async.each(
+  //       lst,
+  //       (cmnt, cb) => {
+  //         cmnt.isActive = false;
+  //         cmnt.save(cb);
+  //       },
+  //       err => {
+  //         console.log(err);
+  //         if (comments) {
+  //           async.each(
+  //             comments,
+  //             (comment, cb) => {
+  //               Comment.findOne({ _id: comment }).then(cmnt => {
+  //                 cmnt.isActive = true;
+  //                 cmnt.save(cb);
+  //               });
+  //             },
+  //             err => {
+  //               console.log(err);
+  //               if (newComment) {
+  //                 var b = new Comment({ commentName: newComment });
+  //                 b.save(err => {
+  //                   console.log(err);
+  //                 });
+  //               }
+  //               res.redirect("/adminDash");
+  //             }
+  //           );
+  //         } else {
+  //           if (newComment) {
+  //             var b = new Comment({ commentName: newComment });
+  //             b.save(err => {
+  //               console.log(err);
+  //             });
+  //           }
+  //           res.redirect("/adminDash");
+  //         }
+  //       }
+  //     );
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
 };

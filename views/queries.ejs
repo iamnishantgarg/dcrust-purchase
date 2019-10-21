@@ -10,6 +10,9 @@
         />
       </div>
       <div class=" form-group">
+
+
+
         <select
           type="text"
           class="form-control"
@@ -17,13 +20,9 @@
           name="department"
           >
           <option value="">All Departments</option>
-
-          <option value="1">Department 1</option>
-          <option value="2">Department 2</option>
-          <option value="3">Department 3</option>
-          <option value="4">Department 4</option>
-          <option value="5">Department 5</option>
-
+          <%for(var i=0;i<departments.length;i++){%>
+          <option><%=departments[i].departmentName%></option>
+          <%}%> 
         </select>
         
       </div>

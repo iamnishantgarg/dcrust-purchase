@@ -1,10 +1,11 @@
 var adminController = require("../controller/admin");
-var { ensureAuthenticated } = require("../config/auth");
+var { ensureAuthenticated, ensureAdmin } = require("../config/auth");
 var BudgetHead = require("../models/budgetHead");
 const router = require("express").Router();
 
 router.get(
   "/adminDash",
+  ensureAdmin,
   ensureAuthenticated,
   adminController.getAdminDashboard
 );

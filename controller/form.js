@@ -67,7 +67,11 @@ exports.getSingleForm = (req, res, next) => {
 };
 
 exports.getQueries = (req, res, next) => {
-  res.render("queries", { files: [] });
+  Department.find({ isActive: true }, (err, departments) => {
+    res.render("queries", { departments, files: [] });
+  });
+
+  // res.render("queries", { files: [] });
 };
 
 exports.postQueries = (req, res, next) => {
@@ -87,7 +91,9 @@ exports.postQueries = (req, res, next) => {
   }
   Forms.find(fil).then(files => {
     console.log(files);
-    return res.render("queries", { files: files });
+    Department.find({ isActive: true }, (err, departments) => {
+      return res.render("queries", { departments, files });
+    });
   });
 };
 
