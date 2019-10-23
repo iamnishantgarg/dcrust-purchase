@@ -1,0 +1,33 @@
+<div class="container p-3">
+  <h1 class="text-center">Budget Heads</h1>
+  <form action="/updateBudgetHead" method="POST">
+    <input type="hidden" value='' name="heads">
+    
+    <%for(var i=0;i<budgetHeads.length;i++){%>
+      <div class="row d-block">
+        <div class="row d-flex justify-content-center mx-5 ">
+          <div class="col text-center border border-info">
+            <label><%=budgetHeads[i].budgetHeadName%></label>
+            <input type="checkbox" class="budgetHeads" name="budgetHeads" class="ml-2" value="<%=budgetHeads[i]._id%>" <%if(budgetHeads[i].isActive){%>checked="true"<%}%> />
+          </div>
+        </div>
+      </div>
+      <%}%>
+   
+    <div class="row d-flex justify-content-center">
+      <input
+        type="text"
+        name="newBudgetHead"
+        placeholder="Add new BudgetHead.."
+        class="form-control my-2"
+        style="width:50%"
+      />
+    </div>
+    <div class="row d-flex justify-content-center">
+      <button class="btn btn-info" type="submit"  style="width: 50%">
+        Update
+      </button>
+    </div>
+  </form>
+</div>
+

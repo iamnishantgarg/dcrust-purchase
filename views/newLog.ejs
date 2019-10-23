@@ -1,0 +1,67 @@
+<div class="container">
+  <%include ./partials/messages%>
+  <form
+    action="/viewFormWaitingForApproval/<%= foundForm._id%>/comments"
+    method="POST"
+    id="log_form"
+  >
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="date" class="form-control" name="date" id="date"  required />
+    </div>
+    <div class="form-group">
+      <label for="department">Department </label>
+      <select class="form-control form-control-lg" name="department">
+      <%for(var i=0;i<departments.length;i++){%>
+      <option><%=departments[i].departmentName%></option>
+      <%}%>  
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="department">Comment</label>
+      <select
+        class="form-control form-control-lg"
+        id="department"
+        name="comment"
+        onchange="addDept();"
+      >
+      <%for(var i=0;i<comments.length;i++){%>
+      <option><%=comments[i].commentName%></option>
+      <%}%>
+        <option>Reject</option>
+        <option>others</option>
+      </select>
+    </div>
+    <div id="dept-log" class="form-group">
+      <input type="text" name="other" class="form-control" id="oth" style="display: none">
+    </div>
+    <input type="Submit" class="btn btn-primary" style="width: 100%" value="Log" />
+  </form>
+</div>
+<script>
+  var dept = document.getElementById("department");
+  var d = false;
+  var logForm = document.getElementById("dept-log");
+  var otherField = document.getElementById("oth");
+  addDept = () => {
+
+    if (dept.value == "others" && !d) {
+      otherField.style.display = "block";
+      // var newField = document.createElement("input");
+      // newField.type = "text";
+      // newField.className = "form-control";
+      // newField.name = "departmentOther";
+      // newField.value = "";
+      // var labl = document.createElement("label");
+      // logForm.appendChild(newField);
+      d = true;
+    } else if (dept.value != "others") {
+      while (logForm.hasChildNodes()) {
+        logForm.removeChild(logForm.lastChild);
+      }
+      d = false;
+    }
+  };
+</script>
+
+<% include partials/footer %>

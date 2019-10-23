@@ -1,0 +1,26 @@
+<div class="container p-3">
+    <h1 class="text-center">Comments</h1>
+    <form action="/updateComment" method="POST">
+        <input type="hidden" value='' name="heads">
+
+        <%for(var i=0;i<Comments.length;i++){%>
+        <div class="row d-block">
+            <div class="row d-flex justify-content-center mx-5 ">
+                <div class="col text-center border border-info">
+                    <label><%=Comments[i].commentName%></label>
+                    <input type="checkbox" class="comments" name="comments" class="ml-2"
+                        value="<%=Comments[i]._id%>" <%if(Comments[i].isActive){%>checked="true" <%}%> />
+          </div>
+        </div>
+      </div>
+      <%}%> <div class="row d-flex justify-content-center">
+                    <input type="text" name="newComment" placeholder="Add new Comment.." class="form-control my-2"
+                        style="width:50%" />
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <button class="btn btn-info" type="submit" style="width: 50%">
+                        Update
+                    </button>
+                </div>
+    </form>
+</div>

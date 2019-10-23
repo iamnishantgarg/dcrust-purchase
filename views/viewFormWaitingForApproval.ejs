@@ -1,0 +1,351 @@
+<style type="text/css">
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+
+
+<!-- <form action="/pdfroute" method="POST">
+  
+</form> -->
+<form  action="/newForm" method="POST">
+<div class="container mt-2" >
+    <hr>
+    <div class="row my-1">
+            <div class="col-md-6">
+                <label for="fileId">File Num</label>
+            </div>
+            <div class="col-md-6">
+                <input 
+                class="form-control"
+                name="fileId"
+                disabled
+                value="<%= foundForm.fileNum %>"/>
+            </div>
+    </div>  
+    <hr>
+    <div class="row my-1">
+            <div class="col-md-6">
+                <label for="fileId">Diary Num</label>
+            </div>
+            <div class="col-md-6">
+                <input 
+                class="form-control"
+                name="fileId"
+                disabled
+                value="<%= foundForm.fileId %>"/>
+            </div>
+    </div>  
+
+
+    <div class="row my-1">
+        <div class="col-md-6">
+          <label for="date">Date Created</label>
+        </div>
+        <div class="col-md-6">
+            <input 
+            class="form-control"
+            name="fileId"
+            disabled
+            value="<%= foundForm.date.toString().substring(0,15) %>"/>
+        </div>
+    </div>  
+
+
+    <hr />
+    
+    <div class="row my-1">
+      
+          <div class="col-md-6">
+              <label for="field1">Complete Specification</label>
+              
+          </div>
+          <div class="col-md-6">
+              <input
+              disabled
+              type="text"
+              class="form-control"
+              name="field1"
+              value="<%= foundForm.field1%>"
+            />
+          </div>
+              
+    </div>         
+    
+    <div class="row my-1">
+      <div class="col-md-6">
+          <label for="quantity">Quantity</label>
+      </div>
+      <div class="col-md-6">
+          <input
+          disabled
+          type="number"
+          class="form-control"
+          name="quantity"
+          value="<%= foundForm.quantity%>"
+        />
+      </div>
+    </div>        
+    
+
+    <div class="row my-1">
+        <div class="col-md-6">
+            <label for="budgetHead">Budget Head </label>
+        </div>
+        <div class="col-md-6">
+          <input
+        disabled              type="number"
+                      class="form-control"
+                      name="quantity"
+                      value="<%= foundForm.budgetHead%>"
+                      placeholder="<%= foundForm.budgetHead%>"
+                    />
+        </div>
+    </div>  
+    
+    <div class="row my-1">
+        <div class="col-md-6">
+            <label for="cost"
+            >Actual/Estimated cost</label
+          >
+        </div>
+        <div class="col-md-6">
+            <input
+            disabled        type="number"
+                    class="form-control"
+                    name="cost"
+                    value="<%= foundForm.cost%>"
+                  />
+        </div>
+    </div>  
+    
+
+    <div class="row my-1">
+          <div class="col-md-6">
+              <label for="nameOfIndenter">Name of Indenter</label>
+          </div>
+          <div class="col-md-6">
+              <input
+        disabled        type="text"
+                class="form-control"
+                name="nameOfIndenter"
+                value="<%= foundForm.nameOfIndenter%>"
+              />
+          </div>
+    </div>  
+
+
+    <div class="row my-1">
+            <div class="col-md-6">
+                <label for="departmentOfIndenter">Department of Indenter</label>
+            </div>
+            <div class="col-md-6">
+                <input
+                disabled        type="text"
+                        class="form-control"
+                        name="nameOfIndenter"
+                        value="<%= foundForm.departmentOfIndenter%>"
+                      />
+            </div>
+    </div>
+          
+    <hr />
+
+
+
+    <% if(!foundForm.approved){%>
+    <div id="myBtn" class="gtb btn btn-primary">Approve</button>
+    </div>
+    <% } %>
+    <%if(!foundForm.rejected){%>
+    <a
+      href="/viewFormWaitingForApproval/<%= foundForm._id%>/comments/new"
+      class="btn btn-success"
+      >Add new log</a
+    ><%}%>
+    <!-- <button class="btn btn-info float-right mx-1" formaction="/pdfroute/<%= foundForm._id%>">Download Logs(PDF)</button> -->
+    <!-- <button onclick="exportTableToExcel('tblData')">Download Logs(Excel)</button> -->
+    <button class="btn btn-warning float-right" type="button" onclick="exportTableToExcel('tblData')">Download Logs(Excel)</button>
+    <button type="button" class="btn btn-info float-right mx-1" id="btnExport" value="Export" onclick="Export()" >Download Logs(PDF)</button>
+  </form>
+  <hr />
+  <table id="tblData" class="tblCustomers" style="width:100%">
+      <tr>
+        <th>Date</th>
+        <th>Department</th>
+        <th>Comment</th>
+      </tr>
+      <% for(var i=foundForm.logs.length-1; i>=0; i--){ %>
+        <tr>
+        <td><%= foundForm.logs[i].date.toString().substring(0,15) %></td>
+        <td><%= foundForm.logs[i].department %></td>
+        <td><%= foundForm.logs[i].comment %></td>
+      </tr>
+      <% } %>
+
+    
+      
+  </table>
+  
+  
+  <hr />
+
+  <a id="myModal" class="modal">
+      <!-- Modal content -->
+      <form action="/changeId" method="POST">
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Enter the File Id</p>
+        
+        <div class="form-group">
+            
+            <input
+              type="text"
+              class="form-control"
+              name="newFileId"
+              
+            />
+          <input type="hidden" name="fileId" value="<%= foundForm.fileId %>">
+        </div>
+        
+        <button type="submit" class="btn btn-success" >
+          Approve</button ><br />
+          
+      </div>
+
+      </form>
+
+</div>
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+        function Export() {
+            html2canvas(document.getElementsByClassName('tblCustomers'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("Table.pdf");
+                }
+            });
+        }
+    </script>
+
+<script>
+
+
+
+
+function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+  var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  };
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+</script>
+
+<% include partials/footer %>
